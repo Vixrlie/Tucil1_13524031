@@ -21,7 +21,13 @@ bool isEmpty(int n, int cur, int *dataCol, int prev, bool area) {
 
 int main() {
     // input
-    ifstream file("input.txt");
+    ifstream file("./test/input.txt");
+
+    if (!file.is_open()) {
+        cout << "File not found" << endl;
+        return 1;
+    }
+
     vector<string> row;
 
     int it=0, n=0;
