@@ -36,7 +36,7 @@ int main() {
     // input
     string fileName = "./test/", tempFilename;
     cout << "-- Queens Solver --\n";
-    cout << "Input your filename in .txt (e.g. input.txt):\n";
+    cout << "Input your test case filename in .txt (e.g. input.txt):\n";
     cout << ">> ";
     cin >> tempFilename;
     fileName.append(tempFilename);
@@ -208,10 +208,35 @@ int main() {
 
     auto end = chrono::high_resolution_clock::now();
     auto dur = chrono::duration_cast<chrono::milliseconds>(end-start);
-    cout << "Program elapsed in " << dur.count() << "ms" << endl;
-    cout << "A total of " << iter << " cases were checked" << endl;
-    cout << "Do you want to save the result? (Y/n)" << endl << ">> ";
-    // ntaran dh outputny
+    cout << "Program elapsed in " << dur.count() << "ms\n";
+    cout << "A total of " << iter << " cases were checked\n";
+    cout << "Do you want to save the result?\n";
+    cout << "1. Yes\n";
+    cout << "2. No\n";
+    cout << ">> ";
+    cin >> choice;
 
-    
+    if (choice == 1) {
+        fileName = "./result/", tempFilename = "";
+        cout << "\nInput your target filename in .txt (e.g. output.txt):\n";
+        cout << ">> ";
+        cin >> tempFilename;
+        fileName.append(tempFilename);
+        ofstream res(fileName);
+
+        for (int i=0; i<n; i++) {
+            for (int j=0; j<dataRow[i]; j++) {
+                res << row[i][j];
+            }
+            if (dataRow[i] != -1) res << "*";;
+            for (int j=dataRow[i]+1; j<n; j++) {
+                res << row[i][j];
+            }
+            res << endl;
+        }
+        res.close();
+        cout << "File saved!\n";
+    }
+
+    cout << "\nProgram terminated";
 }
