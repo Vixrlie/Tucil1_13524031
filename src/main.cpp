@@ -34,7 +34,7 @@ void printRes(int *dataRow, int *dataCol, vector<string> row, int n) {
 
 int main() {
     // input
-    string fileName = "./test/", tempFilename;
+    string fileName = "./testcase/", tempFilename;
     cout << "-- Queens Solver --\n";
     cout << "Input your test case filename in .txt (e.g. input.txt):\n";
     cout << ">> ";
@@ -92,6 +92,8 @@ int main() {
     cout << ">> ";
     cin >> choice;
 
+    cout << "\nSearching...\n";
+    cout << "----------\n";
     auto start = chrono::high_resolution_clock::now();
     if (choice == 1) { // exhaustive
         while (true) {
@@ -117,7 +119,7 @@ int main() {
                     i--;
                     iter++;
                 }
-                if (iter%100000 == 0) {
+                if (iter%100000000 == 0) {
                     printRes(dataRow, dataCol, row, n);
                     cout << "Tries = " << iter << endl;
                     cout << "----------\n";
@@ -154,6 +156,7 @@ int main() {
             if (check) {
                 break;
             } else {
+                if (i==0) break;
                 i--; 
                 int prevCol = dataRow[i];
                 dataCol[prevCol] = -1;
@@ -188,7 +191,7 @@ int main() {
             }
             // printRes(dataRow, dataCol, row, n);
             // cout << "----------\n";
-            if (iter%100000 == 0) {
+            if (iter%100000000 == 0) {
                 printRes(dataRow, dataCol, row, n);
                 cout << "Tries = " << iter << endl;
                 cout << "----------\n";
@@ -207,33 +210,39 @@ int main() {
     auto dur = chrono::duration_cast<chrono::milliseconds>(end-start);
     cout << "Program elapsed in " << dur.count() << "ms\n";
     cout << "A total of " << iter << " cases were checked\n";
-    cout << "Do you want to save the result?\n";
-    cout << "1. Yes\n";
-    cout << "2. No\n";
-    cout << ">> ";
-    cin >> choice;
 
-    if (choice == 1) {
-        fileName = "./result/", tempFilename = "";
-        cout << "\nInput your target filename in .txt (e.g. output.txt):\n";
+    if (dataRow[0] == -1 && dataCol[0] == -1) {
+        cout << "Test case configuration can't be solved!\n";
+    } else {
+        cout << "\nDo you want to save the result?\n";
+        cout << "1. Yes\n";
+        cout << "2. No\n";
         cout << ">> ";
-        cin >> tempFilename;
-        fileName.append(tempFilename);
-        ofstream res(fileName);
+        cin >> choice;
 
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<dataRow[i]; j++) {
-                res << row[i][j];
+        if (choice == 1) {
+            fileName = "./result/", tempFilename = "";
+            cout << "\nInput your target filename in .txt (e.g. output.txt):\n";
+            cout << ">> ";
+            cin >> tempFilename;
+            fileName.append(tempFilename);
+            ofstream res(fileName);
+
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<dataRow[i]; j++) {
+                    res << row[i][j];
+                }
+                if (dataRow[i] != -1) res << "*";;
+                for (int j=dataRow[i]+1; j<n; j++) {
+                    res << row[i][j];
+                }
+                res << endl;
             }
-            if (dataRow[i] != -1) res << "*";;
-            for (int j=dataRow[i]+1; j<n; j++) {
-                res << row[i][j];
-            }
-            res << endl;
+            res.close();
+            cout << "File saved!\n";
         }
-        res.close();
-        cout << "File saved!\n";
     }
 
-    cout << "\nProgram terminated";
+    cout << "\nProgram terminated\n";
+    return 0;
 }
