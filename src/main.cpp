@@ -48,7 +48,6 @@ int main() {
     }
 
     vector<string> row;
-
     int it=0, n=0;
     string temp;
     getline(file, temp);
@@ -94,42 +93,7 @@ int main() {
     cin >> choice;
 
     auto start = chrono::high_resolution_clock::now();
-    // backtrack
-    if (choice == 2) {
-        while(i >= 0 && i < n) {
-            int j=mark;
-            while(j < n) {
-                int prev = (i==0)?-2:dataRow[i-1];
-                if (isEmpty(n, j, dataCol, prev, alfa[row[i][j]])) { // masukin kalo empty doang
-                    dataCol[j] = i;
-                    dataRow[i] = j;
-                    alfa[row[i][j]] = true;
-                    mark = 0;
-                    i++;
-                    break;
-                } else {
-                    j++;
-                }
-            }
-            if (j >= n) {
-                if (i==0) break;
-                alfa[row[i-1][dataRow[i-1]]] = false;
-                dataCol[dataRow[i-1]] = -1;
-                mark = dataRow[i-1]+1;
-                dataRow[i-1] = -1;
-                i--;
-                iter++;
-            }
-            // printRes(dataRow, dataCol, row, n);
-            // cout << "----------\n";
-            if (iter%100000 == 0) {
-                printRes(dataRow, dataCol, row, n);
-                cout << "Tries = " << iter << endl;
-                cout << "----------\n";
-            }
-        }
-    }
-    else if (choice == 1) { // exhaustive
+    if (choice == 1) { // exhaustive
         while (true) {
             while(i >= 0 && i < n) {
                 bool found = false;
@@ -195,6 +159,39 @@ int main() {
                 dataCol[prevCol] = -1;
                 dataRow[i] = -1;
                 mark = prevCol + 1;
+            }
+        }
+    } else if (choice == 2) { // backtrack
+        while(i >= 0 && i < n) {
+            int j=mark;
+            while(j < n) {
+                int prev = (i==0)?-2:dataRow[i-1];
+                if (isEmpty(n, j, dataCol, prev, alfa[row[i][j]])) { // masukin kalo empty doang
+                    dataCol[j] = i;
+                    dataRow[i] = j;
+                    alfa[row[i][j]] = true;
+                    mark = 0;
+                    i++;
+                    break;
+                } else {
+                    j++;
+                }
+            }
+            if (j >= n) {
+                if (i==0) break;
+                alfa[row[i-1][dataRow[i-1]]] = false;
+                dataCol[dataRow[i-1]] = -1;
+                mark = dataRow[i-1]+1;
+                dataRow[i-1] = -1;
+                i--;
+                iter++;
+            }
+            // printRes(dataRow, dataCol, row, n);
+            // cout << "----------\n";
+            if (iter%100000 == 0) {
+                printRes(dataRow, dataCol, row, n);
+                cout << "Tries = " << iter << endl;
+                cout << "----------\n";
             }
         }
     } else {
