@@ -1,0 +1,21 @@
+-- Queens Solver --
+Input your test case filename in .txt (e.g. input.txt):
+>> tc5.txt
+Choose one of the two algorithms:
+1. Pure Brute-force
+2. Backtrack optimization
+>> 1
+
+Searching...
+----------
+AAAAA
+BCCCD
+BCCDD
+BCCDE
+BBBBB
+----------
+Program elapsed in 0ms
+A total of 206 cases were checked
+Test case configuration can't be solved!
+
+Program terminated

@@ -1,0 +1,5 @@
+-- Queens Solver --
+Input your test case filename in .txt (e.g. input.txt):
+>> tc7.txt
+Invalid file: Color mismatch
+make: *** [Makefile:16: all] Error 1

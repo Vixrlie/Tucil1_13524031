@@ -1,0 +1,24 @@
+-- Queens Solver --
+Input your test case filename in .txt (e.g. input.txt):
+>> tc1.txt
+Choose one of the two algorithms:
+1. Pure Brute-force
+2. Backtrack optimization
+>> 1
+
+Searching...
+----------
+AA*A
+*AAA
+BBB*
+B*CD
+----------
+Program elapsed in 2ms
+A total of 22 cases were checked
+
+Do you want to save the result?
+1. Yes
+2. No
+>> 2
+
+Program terminated

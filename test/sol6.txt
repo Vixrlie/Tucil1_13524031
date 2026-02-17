@@ -1,0 +1,7 @@
+-- Queens Solver --
+Input your test case filename in .txt (e.g. input.txt):
+>> tc6.txt
+Invalid file: Row and Column mismatch
+Row = 3
+Col = 4
+make: *** [Makefile:16: all] Error 1
